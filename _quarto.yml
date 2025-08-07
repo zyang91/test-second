@@ -1,0 +1,20 @@
+project:
+  type: website
+
+website:
+  title: "Your Name - MUSA 5080 Portfolio"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: weekly-notes/
+        text: Weekly Notes
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+
+execute:
+  freeze: auto
