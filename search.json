@@ -4,42 +4,35 @@
     "href": "weekly-notes/week-01-notes.html",
     "title": "Week 1 Notes - Course Introduction",
     "section": "",
-    "text": "[List main concepts from lecture]\n[Technical skills covered]"
+    "text": "Cloned the course portfolio template from github\nUpdated the index, about qmd files\ncreated a sample lab exercise with some simple census analysis in .qmd"
   },
   {
     "objectID": "weekly-notes/week-01-notes.html#key-concepts-learned",
     "href": "weekly-notes/week-01-notes.html#key-concepts-learned",
     "title": "Week 1 Notes - Course Introduction",
     "section": "",
-    "text": "[List main concepts from lecture]\n[Technical skills covered]"
+    "text": "Cloned the course portfolio template from github\nUpdated the index, about qmd files\ncreated a sample lab exercise with some simple census analysis in .qmd"
   },
   {
     "objectID": "weekly-notes/week-01-notes.html#coding-techniques",
     "href": "weekly-notes/week-01-notes.html#coding-techniques",
     "title": "Week 1 Notes - Course Introduction",
     "section": "Coding Techniques",
-    "text": "Coding Techniques\n\n[New R functions or approaches]\n[Quarto features learned]"
+    "text": "Coding Techniques\n\nremembered to add progress = FALSE when gathering ACS data when geometry = TRUE otherwise we get the ugly progress bars when rendering the .qmd."
   },
   {
     "objectID": "weekly-notes/week-01-notes.html#questions-challenges",
     "href": "weekly-notes/week-01-notes.html#questions-challenges",
     "title": "Week 1 Notes - Course Introduction",
     "section": "Questions & Challenges",
-    "text": "Questions & Challenges\n\n[What I didn’t fully understand]\n[Areas needing more practice]"
-  },
-  {
-    "objectID": "weekly-notes/week-01-notes.html#connections-to-policy",
-    "href": "weekly-notes/week-01-notes.html#connections-to-policy",
-    "title": "Week 1 Notes - Course Introduction",
-    "section": "Connections to Policy",
-    "text": "Connections to Policy\n\n[How this week’s content applies to real policy work]"
+    "text": "Questions & Challenges\n\nThe quarto website syntax is new\nAlways put a blank line after heading when creating bullet list otherwise it doesn’t list!"
   },
   {
     "objectID": "weekly-notes/week-01-notes.html#reflection",
     "href": "weekly-notes/week-01-notes.html#reflection",
     "title": "Week 1 Notes - Course Introduction",
     "section": "Reflection",
-    "text": "Reflection\n\n[What was most interesting]\n[How I’ll apply this knowledge]"
+    "text": "Reflection\n\nThis was very fun and satisfying"
   },
   {
     "objectID": "index.html",
@@ -75,5 +68,117 @@
     "title": "MUSA 5080 Portfolio",
     "section": "",
     "text": "Email: [your.email@upenn.edu]\nGitHub: [@your-username]"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Dr. Delmelle",
+    "section": "",
+    "text": "I’m Dr. Elizabeth Delmelle, and this is my sample portfolio page for the course."
+  },
+  {
+    "objectID": "about.html#welcome",
+    "href": "about.html#welcome",
+    "title": "About Dr. Delmelle",
+    "section": "",
+    "text": "I’m Dr. Elizabeth Delmelle, and this is my sample portfolio page for the course."
+  },
+  {
+    "objectID": "about.html#why-i-built-this",
+    "href": "about.html#why-i-built-this",
+    "title": "About Dr. Delmelle",
+    "section": "Why I Built This:",
+    "text": "Why I Built This:\nTo demo how it is done! This also helps me to:\n\nModel good practices for documentation and analysis\nStay up to date! nobody wants to be the dinosaur instructor.\nUnderstand student challenges by doing the work myself."
+  },
+  {
+    "objectID": "about.html#my-background",
+    "href": "about.html#my-background",
+    "title": "About Dr. Delmelle",
+    "section": "My Background",
+    "text": "My Background\nI was born and raised in Newburgh, NY. I studied Geography (GIS) and Urban Regional Analysis at James Madison University, SUNY Buffalo, and UNC Charlotte. I love teaching and learning new things. I have an unhealthy relationship with the NY Mets and these days I’m really into (but not that good at) CrossFit. You’ll hear about all of these things all semester long!"
+  },
+  {
+    "objectID": "about.html#contact",
+    "href": "about.html#contact",
+    "title": "About Dr. Delmelle",
+    "section": "Contact",
+    "text": "Contact\n\nEmail: delmelle@design.upenn.edu\nOffice: Meyerson Hall, CPLN/MUSA Suite"
+  },
+  {
+    "objectID": "labs/sample-census-analysis.html",
+    "href": "labs/sample-census-analysis.html",
+    "title": "Sample Census Analysis",
+    "section": "",
+    "text": "This is simply some sample analysis showing students how to document their work professionally.\nThis is not a real assignment for this course!"
+  },
+  {
+    "objectID": "labs/sample-census-analysis.html#introduction",
+    "href": "labs/sample-census-analysis.html#introduction",
+    "title": "Sample Census Analysis",
+    "section": "",
+    "text": "This is simply some sample analysis showing students how to document their work professionally.\nThis is not a real assignment for this course!"
+  },
+  {
+    "objectID": "labs/sample-census-analysis.html#setup",
+    "href": "labs/sample-census-analysis.html#setup",
+    "title": "Sample Census Analysis",
+    "section": "Setup",
+    "text": "Setup\n\n\nCode\nlibrary(tidyverse)\nlibrary(tidycensus)\nlibrary(sf)\nlibrary(ggplot2)\nlibrary(leaflet)\nlibrary(tigris)\ncensus_api_key(\"42bf8a20a3df1def380f330cf7edad0dd5842ce6\")\n\n\nLet’s example how median income varies across the city of Philadelphia\n\n\nCode\n# Get Philadelphia County data\nphilly_income &lt;- get_acs(\n  geography = \"tract\",\n  variables = \"B19013_001\", # Median household income\n  state = \"PA\",\n  county = \"Philadelphia\",\n  geometry = TRUE,\n  year = 2022,\n  progress = FALSE \n)\n\n\nGetting data from the 2018-2022 5-year ACS\n\n\nDownloading feature geometry from the Census website.  To cache shapefiles for use in future sessions, set `options(tigris_use_cache = TRUE)`.\n\n\nCode\n# Clean the data\nphilly_income &lt;- philly_income |&gt;\n  filter(!is.na(estimate)) |&gt;\n  mutate(income_k = estimate / 1000) # Convert to thousands for easier reading"
+  },
+  {
+    "objectID": "labs/sample-census-analysis.html#exploratory-analysis",
+    "href": "labs/sample-census-analysis.html#exploratory-analysis",
+    "title": "Sample Census Analysis",
+    "section": "Exploratory Analysis",
+    "text": "Exploratory Analysis\n\n\nCode\n# Basic summary\nsummary(philly_income$estimate)\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  14983   39596   58514   63883   82809  181066 \n\n\nCode\n# Histogram\nggplot(philly_income, aes(x = income_k)) +\n  geom_histogram(bins = 30, fill = \"steelblue\", alpha = 0.7) +\n  labs(\n    title = \"Distribution of Median Household Income\",\n    subtitle = \"Philadelphia Census Tracts, 2022 ACS\",\n    x = \"Median Household Income (thousands)\",\n    y = \"Number of Census Tracts\"\n  ) +\n  theme_minimal()\n\n\n\n\n\nDistribution of median household income in Philadelphia"
+  },
+  {
+    "objectID": "labs/sample-census-analysis.html#spatial-analysis",
+    "href": "labs/sample-census-analysis.html#spatial-analysis",
+    "title": "Sample Census Analysis",
+    "section": "Spatial Analysis",
+    "text": "Spatial Analysis\n\n\nCode\n# Create income classes\nphilly_income &lt;- philly_income |&gt;\n  mutate(\n    income_class = case_when(\n      income_k &lt; 25 ~ \"Under $25k\",\n      income_k &gt;= 25 & income_k &lt; 50 ~ \"$25k - $50k\", \n      income_k &gt;= 50 & income_k &lt; 75 ~ \"$50k - $75k\",\n      income_k &gt;= 75 & income_k &lt; 100 ~ \"$75k - $100k\",\n      income_k &gt;= 100 ~ \"$100k+\"\n    ),\n    # Convert to factor to control order\n    income_class = factor(income_class, \n                         levels = c(\"Under $25k\", \"$25k - $50k\", \"$50k - $75k\", \n                                   \"$75k - $100k\", \"$100k+\"))\n  )\n\n# Create choropleth map with classes\nggplot &lt;- ggplot(philly_income) +\n  geom_sf(aes(fill = income_class), color = \"white\", size = 0.1) +\n  scale_fill_brewer(type = \"seq\", palette = \"YlOrRd\", name = \"Median\\nIncome\") +\n  labs(\n    title = \"Median Household Income by Census Tract\",\n    subtitle = \"Philadelphia, 2022 ACS 5-Year Estimates\",\n    caption = \"Source: U.S. Census Bureau\"\n  ) +\n  theme_void() +\n  theme(\n    plot.title = element_text(size = 14, hjust = 0.5),\n    plot.subtitle = element_text(size = 12, hjust = 0.5),\n    legend.position = \"bottom\"\n  )\n\n# Get water features for Philadelphia\nphilly_water &lt;- area_water(state = \"PA\", county = \"Philadelphia\", \n                          year = 2022, progress = FALSE)\n# Add to your map\nggplot() +\n  # Water first (background)\n  geom_sf(data = philly_water, fill = \"lightblue\", color = \"lightblue\", alpha = 0.7) +\n  # Then census tracts on top\n  geom_sf(data = philly_income, aes(fill = income_class), color = \"white\", size = 0.1) +\n  scale_fill_brewer(type = \"seq\", palette = \"YlOrRd\", name = \"Median\\nIncome\") +\n  labs(\n    title = \"Median Household Income by Census Tract\",\n    subtitle = \"Philadelphia, 2022 ACS 5-Year Estimates\",\n    caption = \"Source: U.S. Census Bureau\"\n  ) +\n  theme_void() +\n  theme(\n    plot.title = element_text(size = 14, hjust = 0.5),\n    plot.subtitle = element_text(size = 12, hjust = 0.5),\n    legend.position = \"bottom\"\n  )\n\n\n\n\n\nSpatial distribution of income across Philadelphia"
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html",
+    "href": "weekly-notes/week-02-notes.html",
+    "title": "Week 1 Notes - Course Introduction",
+    "section": "",
+    "text": "[List main concepts from lecture]\n[Technical skills covered]"
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html#key-concepts-learned",
+    "href": "weekly-notes/week-02-notes.html#key-concepts-learned",
+    "title": "Week 1 Notes - Course Introduction",
+    "section": "",
+    "text": "[List main concepts from lecture]\n[Technical skills covered]"
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html#coding-techniques",
+    "href": "weekly-notes/week-02-notes.html#coding-techniques",
+    "title": "Week 1 Notes - Course Introduction",
+    "section": "Coding Techniques",
+    "text": "Coding Techniques\n\n[New R functions or approaches]\n[Quarto features learned]"
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html#questions-challenges",
+    "href": "weekly-notes/week-02-notes.html#questions-challenges",
+    "title": "Week 1 Notes - Course Introduction",
+    "section": "Questions & Challenges",
+    "text": "Questions & Challenges\n\n[What I didn’t fully understand]\n[Areas needing more practice]"
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html#connections-to-policy",
+    "href": "weekly-notes/week-02-notes.html#connections-to-policy",
+    "title": "Week 1 Notes - Course Introduction",
+    "section": "Connections to Policy",
+    "text": "Connections to Policy\n\n[How this week’s content applies to real policy work]"
+  },
+  {
+    "objectID": "weekly-notes/week-02-notes.html#reflection",
+    "href": "weekly-notes/week-02-notes.html#reflection",
+    "title": "Week 1 Notes - Course Introduction",
+    "section": "Reflection",
+    "text": "Reflection\n\n[What was most interesting]\n[How I’ll apply this knowledge]"
   }
 ]
