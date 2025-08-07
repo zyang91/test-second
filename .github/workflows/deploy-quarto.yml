@@ -3,28 +3,30 @@ name: Render & Deploy Quarto Site to gh-page
 on:
   push:
     branches:
-      - main   
+      - main    # or your default branch
+
+permissions:
+  contents: write     # needed to push to another branch
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      # 1. Check out the repo
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Render the Quarto site into docs/
-      - name: Render Quarto site
-        uses: quarto-dev/quarto-actions@v2
-        with:
-          command: render
+      - name: Install Quarto CLI
+        uses: quarto-dev/quarto-actions/setup@v2
 
-      # 3. Deploy docs/ to the gh-page branch
+      - name: Render Quarto site
+        uses: quarto-dev/quarto-actions/render@v2
+
       - name: Deploy to gh-page branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           publish_branch: gh-page
-          # Optional: if you want a clean slate each time
           clean: true
+
