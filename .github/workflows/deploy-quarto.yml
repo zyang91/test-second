@@ -1,32 +1,47 @@
-name: Render & Deploy Quarto Site to gh-page
+name: Build & Deploy Quarto (gh-page)
 
 on:
   push:
-    branches:
-      - main    # or your default branch
+    branches: [ main ]
 
 permissions:
-  contents: write     # needed to push to another branch
+  contents: write
 
 jobs:
-  build-and-deploy:
+  build-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Install Quarto CLI
-        uses: quarto-dev/quarto-actions/setup@v2
+      # Quarto CLI
+      - uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Render Quarto site
+      # Install R
+      - uses: r-lib/actions/setup-r@v2
+
+      # (Optional but helpful) Install R deps Quarto needs to knit
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          # add whatever your .qmds need, e.g. any::knitr, any::rmarkdown, any::tidyverse, any::sf
+          extra-packages: any::knitr, any::rmarkdown
+
+      # Sanity check
+      - name: Show versions
+        run: |
+          Rscript --version
+          quarto --version
+
+      # Render the site (writes to docs/ per your _quarto.yml)
+      - name: Render site
         uses: quarto-dev/quarto-actions/render@v2
+        with:
+          path: .
 
-      - name: Deploy to gh-page branch
-        uses: peaceiris/actions-gh-pages@v3
+      # Deploy docs/ to gh-page
+      - name: Deploy to gh-page
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           publish_branch: gh-page
-          clean: true
-
+          allow_empty_commit: true
