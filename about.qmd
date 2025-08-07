@@ -1,0 +1,26 @@
+---
+title: "About Dr. Delmelle"
+---
+
+## Welcome!
+
+I'm Dr. Elizabeth Delmelle, and this is my sample portfolio page for the course.
+
+## Why I Built This:
+
+To demo how it is done!
+This also helps me to:
+
+  - **Model good practices** for documentation and analysis
+  - **Stay up to date!** nobody wants to be the dinosaur instructor.
+  - **Understand student challenges** by doing the work myself.
+  
+## My Background
+
+I was born and raised in Newburgh, NY. I studied Geography (GIS) and Urban Regional Analysis at *James Madison University*, *SUNY Buffalo*, and *UNC Charlotte*. 
+I love teaching and learning new things. I have an unhealthy relationship with the NY Mets and these days I'm really into (but not that good at) CrossFit. You'll hear about all of these things all semester long!
+
+## Contact
+  - **Email:** delmelle@design.upenn.edu
+  - **Office:** Meyerson Hall, CPLN/MUSA Suite
+

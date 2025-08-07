@@ -4,20 +4,23 @@ date: "2025-09-08"
 ---
 
 ## Key Concepts Learned
-- [List main concepts from lecture]
-- [Technical skills covered]
+
+- Cloned the course portfolio template from github
+- Updated the index, about qmd files
+- created a sample lab exercise with some simple census analysis in .qmd
 
 ## Coding Techniques
-- [New R functions or approaches]
-- [Quarto features learned]
+
+- remembered to add progress = FALSE when gathering ACS data when geometry = TRUE otherwise we get the ugly progress bars when rendering the .qmd.
+
 
 ## Questions & Challenges
-- [What I didn't fully understand]
-- [Areas needing more practice]
 
-## Connections to Policy
-- [How this week's content applies to real policy work]
+- The quarto website syntax is new
+- Always put a blank line after heading when creating bullet list otherwise it doesn't list!
+
 
 ## Reflection
-- [What was most interesting]
-- [How I'll apply this knowledge]
+
+- This was very fun and satisfying
+
